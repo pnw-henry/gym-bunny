@@ -1,0 +1,35 @@
+:root {
+  --brand-pink: hsl(313, 50%, 24%);
+  --brand-blue: #399fa6;
+  --bg-color: hsl(187, 8%, 98%);
+}
+
+.App {
+  width: 1000px;
+  min-height: 100vh;
+
+  background-color: hsl(187, 8%, 98%);
+}
+
+header {
+  padding: 1.5em 1.5em 0 1.5em;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
+
+header .logo {
+  width: 3em;
+  height: 3em;
+}
+
+.logo {
+  fill: url(#GradientFill);
+  width: 1.5em;
+  height: 1.5em;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
