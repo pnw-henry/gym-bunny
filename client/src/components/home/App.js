@@ -27,6 +27,7 @@ function App() {
   const [userSets, setUserSets] = useState([]);
   const [userReps, setUserReps] = useState([]);
   const [userWorkouts, setUserWorkouts] = useState([]);
+  const [userSweats, setUserSweats] = useState([]);
 
   const routinesAPI = "/routines";
   const exercisesAPI = "/exercises";
@@ -59,6 +60,7 @@ function App() {
             setUser(user);
             setUserWorkouts(user.workouts);
             setFavorites(user.favorites);
+            setUserSweats(user.sweats);
             setIsLoggedIn(true);
           });
         } else {
@@ -103,6 +105,8 @@ function App() {
               setUserReps,
               userWorkouts,
               setUserWorkouts,
+              userSweats,
+              setUserSweats,
             }}
           >
             <div className="App">

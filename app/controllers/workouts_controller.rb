@@ -30,6 +30,6 @@ class WorkoutsController < ApplicationController
         private
     
         def workout_params
-            params.permit(:date, :time, :calories_burned, :user_id, :routine_id)
+            params.permit(:date, :duration, :calories_burned, :user_id, :routine_id)
         end
 end

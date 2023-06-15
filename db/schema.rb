@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_235812) do
 
   create_table "workouts", force: :cascade do |t|
     t.date "date"
-    t.integer "time"
+    t.integer "duration"
     t.integer "calories_burned"
     t.integer "user_id"
     t.integer "routine_id"

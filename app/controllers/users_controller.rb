@@ -7,12 +7,12 @@ class UsersController < ApplicationController
     def create
         user = User.create!(user_params)
         session[:user_id] = user.id
-        render json: user, include: [:favorites, :workouts], status: :created
+        render json: user, include: [:favorites, :workouts, :sweats], status: :created
     end
 
     def show
         user = User.find_by(id: session[:user_id])
-        render json: user, include: [:favorites, :workouts], status: :ok
+        render json: user, include: [:favorites, :workouts, :sweats], status: :ok
     end
 
     private

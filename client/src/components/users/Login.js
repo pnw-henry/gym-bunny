@@ -10,7 +10,7 @@ function Login({ errors, setErrors, toggleSignup, signUp }) {
   const [password, setPassword] = useState("");
   const { setUser, setIsLoggedIn } = useContext(UserContext);
   const { setFavorites } = useContext(RoutineContext);
-  const { setWorkouts } = useContext(WorkoutContext);
+  const { setUserWorkouts, setUserSweats } = useContext(WorkoutContext);
   const navigate = useNavigate();
 
   const loginApi = "/login";
@@ -34,7 +34,8 @@ function Login({ errors, setErrors, toggleSignup, signUp }) {
           console.log(user);
           setUser(user);
           setFavorites(user.favorites);
-          setWorkouts(user.workouts);
+          setUserWorkouts(user.workouts);
+          setUserSweats(user.sweats);
           setIsLoggedIn(true);
           navigate("/");
         });

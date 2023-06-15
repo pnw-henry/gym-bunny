@@ -15,7 +15,7 @@ function SignUp({ errors, setErrors, toggleSignup, signUp }) {
 
   const { setUser, setIsLoggedIn } = useContext(UserContext);
   const { setFavorites } = useContext(RoutineContext);
-  const { setWorkouts } = useContext(WorkoutContext);
+  const { setUserWorkouts, setUserSweats } = useContext(WorkoutContext);
   const navigate = useNavigate();
   const signupApi = "/users";
 
@@ -43,7 +43,8 @@ function SignUp({ errors, setErrors, toggleSignup, signUp }) {
           setIsLoggedIn(true);
           setUser(user);
           setFavorites(user.favorites);
-          setWorkouts(user.workouts);
+          setUserWorkouts(user.workouts);
+          setUserSweats(user.sweats);
           navigate("/");
         });
       } else {

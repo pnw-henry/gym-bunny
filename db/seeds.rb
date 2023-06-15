@@ -53,9 +53,9 @@ shoulder_press_set = ExerciseSet.create!(exercise_id: shoulder_press.id, routine
 plank_set = ExerciseSet.create!(exercise_id: plank.id, routine_id: core.id, reps: 10, set_number: 3)
 
 # Create Workouts
-chest_workout = Workout.create!(date: "2020-03-01", time: 30, calories_burned: 300, user_id: henry.id, routine_id: chest.id)
-back_workout = Workout.create!(date: "2020-03-02", time: 30, calories_burned: 300, user_id: henry.id, routine_id: back.id)
-legs_workout = Workout.create!(date: "2020-03-03", time: 60, calories_burned: 550, user_id: will.id, routine_id: legs.id)
+chest_workout = Workout.create!(date: "2020-03-01", duration: 30, calories_burned: 300, user_id: henry.id, routine_id: chest.id)
+back_workout = Workout.create!(date: "2020-03-02", duration: 30, calories_burned: 300, user_id: henry.id, routine_id: back.id)
+legs_workout = Workout.create!(date: "2020-03-03", duration: 60, calories_burned: 550, user_id: will.id, routine_id: legs.id)
 
 
 

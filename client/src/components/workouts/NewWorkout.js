@@ -104,7 +104,7 @@ function NewWorkout() {
         routine_id: routine.id,
         user_id: user.id,
         date: formattedDate,
-        time: 0,
+        duration: 0,
         calories_burned: 0,
       }),
     });
