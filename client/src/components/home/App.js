@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { UserContext } from "../users/UserContext";
 import { ExerciseContext } from "../exercises/ExerciseContext";
 import { RoutineContext } from "../routines/RoutineContext";
@@ -72,13 +72,7 @@ function App() {
         console.log(error);
       });
   }, [setIsLoggedIn, setUser]);
-
-  console.log("user", user);
-  console.log("routines", routines);
-  console.log("favorites", favorites);
-  console.log("exercises", exercises);
-  console.log("exerciseSets", exerciseSets);
-  console.log("workouts", userWorkouts);
+  console.log("user workouts", userWorkouts);
 
   return (
     <ExerciseContext.Provider

@@ -38,20 +38,23 @@ function RoutinePage() {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split("T")[0];
 
+    const workoutObj = {
+      routine_id: routine.id,
+      user_id: user.id,
+      date: formattedDate,
+      duration: 0,
+      calories_burned: 0,
+    };
+
     const response = await fetch("/workouts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        routine_id: routine.id,
-        user_id: user.id,
-        date: formattedDate,
-        duration: 0,
-        calories_burned: 0,
-      }),
+      body: JSON.stringify(workoutObj),
     });
     const newWorkout = await response.json();
+    console.log("newWorkout", newWorkout);
     setUserWorkouts([...userWorkouts, newWorkout]);
     navigate(`/workout-progress/${newWorkout.id}`);
   };
@@ -61,7 +64,7 @@ function RoutinePage() {
       <h1>{routine.name}</h1>
       <p>{routine.description}</p>
       <Link to={`/new-workout/${routine.id}`}>
-        <button className="new-workout-button">Modify Sets/Reps</button>
+        <button className="modify-sets-button">Modify Sets/Reps</button>
       </Link>
       {user ? (
         <button className="begin-workout-button" onClick={handleBeginWorkout}>

@@ -30,16 +30,14 @@ function Profile() {
     const routine = routines.find(
       (routine) => routine.id === workout.routine_id
     );
-    if (workout.duration > 0) {
-      return (
-        <WorkoutCard
-          key={workout.id}
-          workout={workout}
-          routine={routine}
-          onDeleteWorkout={handleDeleteWorkout}
-        />
-      );
-    }
+    return (
+      <WorkoutCard
+        key={workout.id}
+        workout={workout}
+        routine={routine}
+        onDeleteWorkout={handleDeleteWorkout}
+      />
+    );
   });
 
   return (

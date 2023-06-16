@@ -18,7 +18,7 @@ function NewWorkout() {
   } = useContext(WorkoutContext);
   const navigate = useNavigate();
   const [savedExercises, setSavedExercises] = useState([]);
-  const [sweatData, setSweatData] = useState({});
+  const [sweatData, setSweatData] = useState([]);
 
   const routine = routines.find((routine) => routine.id === Number(routineId));
   if (!routine) {
