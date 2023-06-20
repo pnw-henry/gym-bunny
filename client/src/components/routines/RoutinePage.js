@@ -4,7 +4,7 @@ import { ExerciseContext } from "../exercises/ExerciseContext";
 import { RoutineContext } from "./RoutineContext";
 import { UserContext } from "../users/UserContext";
 import { WorkoutContext } from "../workouts/WorkoutContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function RoutinePage() {
@@ -15,6 +15,10 @@ function RoutinePage() {
   const { userWorkouts, setUserWorkouts } = useContext(WorkoutContext);
   const routine = routines.find((routine) => routine.id === Number(id));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!routine) {
     return <div>Loading...</div>;
@@ -63,9 +67,6 @@ function RoutinePage() {
     <div className="routine-page">
       <h1>{routine.name}</h1>
       <p>{routine.description}</p>
-      <Link to={`/new-workout/${routine.id}`}>
-        <button className="modify-sets-button">Modify Sets/Reps</button>
-      </Link>
       {user ? (
         <button className="begin-workout-button" onClick={handleBeginWorkout}>
           Begin Workout
@@ -81,6 +82,11 @@ function RoutinePage() {
           return (
             <div className="routine-exercise" key={exercise.id}>
               <h2>{exercise.name}</h2>
+              <div className="exercise-photo">
+                {exercise.exercise_photo && (
+                  <img src={exercise.exercise_photo} alt="exercise_photo" />
+                )}
+              </div>
               <p>{exercise.description}</p>
               <p>Muscle Target: {exercise.muscle_target}</p>
               <p>Sets: {exercise.sets}</p>

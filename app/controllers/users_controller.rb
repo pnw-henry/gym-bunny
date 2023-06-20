@@ -15,6 +15,14 @@ class UsersController < ApplicationController
         render json: user, include: [:favorites, :workouts, :sweats], status: :ok
     end
 
+    def update
+        user = User.find_by(id: session[:user_id])
+        user.avatar.attach(params[:avatar])
+        user.save(validate: false)
+        render json: user, include: [:favorites, :workouts, :sweats], status: :ok
+    end
+
+
     private
 
     def render_unprocessable_entity_response(exception)
@@ -30,6 +38,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.permit(:name, :email, :email_confirmation, :username, :password, :password_confirmation )
+        params.permit(:name, :email, :email_confirmation, :username, :password, :password_confirmation, :avatar )
     end
 end

@@ -2,18 +2,22 @@ import React, { useState, useContext, useEffect } from "react";
 import { WorkoutContext } from "./WorkoutContext";
 import { UserContext } from "../users/UserContext";
 import { RoutineContext } from "../routines/RoutineContext";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function WorkoutProgress() {
   const { workoutId } = useParams();
   const { user } = useContext(UserContext);
   const { routines } = useContext(RoutineContext);
-  const { userWorkouts } = useContext(WorkoutContext);
+  const { userWorkouts, setUserWorkouts, userSweats, setUserSweats } =
+    useContext(WorkoutContext);
   const [workout, setWorkout] = useState([]);
   const [routine, setRoutine] = useState([]);
   const [routineSweats, setRoutineSweats] = useState([]);
   const [duration, setDuration] = useState([]);
   const [calories, setCalories] = useState([]);
+  const [notes, setNotes] = useState("");
+  const [isPlaceHolderVisible, setIsPlacedHolderVisible] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const workout = userWorkouts.find(
@@ -61,6 +65,7 @@ function WorkoutProgress() {
       const newSweat = {
         exercise_id: exercise.id,
         routine_id: routine.id,
+        workout_id: workout.id,
         user_id: user.id,
         reps: parseInt(value, 10),
         sets: predefinedSets,
@@ -84,6 +89,7 @@ function WorkoutProgress() {
       const newSweat = {
         exercise_id: exercise.id,
         routine_id: routine.id,
+        workout_id: workout.id,
         user_id: user.id,
         reps: predefinedReps,
         sets: parseInt(value, 10),
@@ -107,6 +113,7 @@ function WorkoutProgress() {
       const newSweat = {
         exercise_id: exercise.id,
         routine_id: routine.id,
+        workout_id: workout.id,
         user_id: user.id,
         reps: predefinedReps,
         sets: predefinedSets,
@@ -115,6 +122,11 @@ function WorkoutProgress() {
       updatedSweats.push(newSweat);
       setRoutineSweats(updatedSweats);
     }
+  };
+
+  const handleNotesChange = (event) => {
+    setNotes(event.target.value);
+    setIsPlacedHolderVisible(false);
   };
 
   const handleSubmit = (event) => {
@@ -126,14 +138,46 @@ function WorkoutProgress() {
         ...sweat,
       };
     });
+    sweatData.forEach((sweat) => {
+      fetch("/sweats", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sweat),
+      })
+        .then((response) => response.json())
+        .then((sweat) => {
+          console.log("Sweat Post Success:", sweat);
+          setUserSweats([...userSweats, sweat]);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
     const workoutData = {
       ...workout,
       duration: duration,
       calories_burned: calories,
       date: formattedDate,
+      notes: notes,
     };
-    console.log("sweatData", sweatData);
-    console.log("workoutData", workoutData);
+    fetch(`/workouts/${workout.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(workoutData),
+    })
+      .then((response) => response.json())
+      .then((workout) => {
+        console.log("Workout Patch Success:", workout);
+        setUserWorkouts([...userWorkouts, workout]);
+        navigate("/profile");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   if (workout.length === 0 || routine.length === 0) {
@@ -216,7 +260,7 @@ function WorkoutProgress() {
           id="duration"
           name="duration"
           value={duration}
-          onChange={(e) => setDuration(e.target.value)}
+          onChange={(e) => setDuration(parseInt(e.target.value))}
         />
         <label htmlFor="calories">Calories Burned:</label>
         <input
@@ -224,7 +268,15 @@ function WorkoutProgress() {
           id="calories"
           name="calories"
           value={calories}
-          onChange={(e) => setCalories(e.target.value)}
+          onChange={(e) => setCalories(parseInt(e.target.value))}
+        />
+        <label htmlFor="notes">Notes:</label>
+        <textarea
+          id="notes"
+          name="notes"
+          placeholder={isPlaceHolderVisible ? "Add notes here..." : null}
+          value={notes}
+          onChange={handleNotesChange}
         />
       </div>
       <button onClick={handleSubmit}>Submit</button>

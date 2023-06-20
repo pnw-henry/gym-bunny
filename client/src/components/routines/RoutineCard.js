@@ -8,6 +8,7 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
   const { id, name, description, owner } = routine;
   const { user } = useContext(UserContext);
   const { favorites } = useContext(RoutineContext);
+  //const [photo, setPhoto] = useState(null);
 
   const handleAddFavorite = () => {
     fetch(`/favorites`, {
@@ -25,6 +26,22 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
         onAddFavorite(newFavorite);
       });
   };
+  /*
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]);
+  };
+
+  const handlePhotoSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("routine_photo", photo);
+    fetch(`/routines/${id}`, {
+      method: "PATCH",
+      body: formData,
+    });
+  };
+
+  */
 
   const handleDeleteFavorite = () => {
     const favoriteToDelete = favorites.find(
@@ -41,8 +58,14 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
     <div className="routine-card">
       <h2>{name}</h2>
       <p>{description}</p>
+      <Link to={`/routines/${id}`}>
+        <div className="routine-photo">
+          {routine.routine_photo && (
+            <img src={routine.routine_photo} alt="routine_photo" />
+          )}
+        </div>
+      </Link>
       <p>By: {owner}</p>
-      <Link to={`/routines/${id}`}>Viw Routine</Link>
       {user && !favorites.find((favorite) => favorite.routine_id === id) && (
         <button onClick={handleAddFavorite}>Add Favorite</button>
       )}

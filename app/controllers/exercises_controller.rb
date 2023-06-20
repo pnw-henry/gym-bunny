@@ -15,9 +15,10 @@ class ExercisesController < ApplicationController
         render json: exercise
     end
 
-    def update
+   def update
         exercise = Exercise.find_by(id: params[:id])
-        exercise.update(exercise_params)
+        exercise.exercise_photo.attach(params[:exercise_photo])
+        exercise.save
         render json: exercise
     end
 
@@ -30,6 +31,6 @@ class ExercisesController < ApplicationController
     private
 
     def exercise_params
-        params.permit(:name, :description, :user_id)
+        params.permit(:name, :description, :user_id, :exercise_photo)
     end
 end

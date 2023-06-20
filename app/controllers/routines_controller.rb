@@ -17,7 +17,8 @@ class RoutinesController < ApplicationController
 
     def update
         routine = Routine.find_by(id: params[:id])
-        routine.update(routine_params)
+        routine.routine_photo.attach(params[:routine_photo])
+        routine.save
         render json: routine
     end
 
@@ -30,6 +31,6 @@ class RoutinesController < ApplicationController
     private
 
     def routine_params
-        params.permit(:name, :description, :muscle_group, :is_public, :owner)
+        params.permit(:name, :description, :muscle_group, :is_public, :owner, :routine_photo)
     end
 end

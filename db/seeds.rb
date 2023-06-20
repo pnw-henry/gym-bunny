@@ -31,6 +31,10 @@ hammer_curl = Exercise.create!(name: "Hammer Curl", description: "The hammer cur
 shoulder_flye = Exercise.create!(name: "Shoulder Flye", description: "The shoulder fly or lateral raise is a strength training exercise. A type of shoulder isolation exercise, it works the deltoid muscles in the shoulder.", muscle_target: "Shoulders")
 shoulder_press = Exercise.create!(name: "Shoulder Press", description: "The shoulder press is a weight training exercise in which a weight is pressed from the shoulders until it is locked out overhead.", muscle_target: "Shoulders")
 plank = Exercise.create!(name: "Plank", description: "The plank is an isometric core strength exercise that involves maintaining a position similar to a push-up for the maximum possible time.", muscle_target: "Core")
+sit_up = Exercise.create!(name: "Sit Up", description: "The sit-up is an abdominal endurance training exercise commonly performed to strengthen and tone the abdominal muscles. It is similar to a crunch, but sit-ups have a fuller range of motion and condition additional muscles.", muscle_target: "Core")
+crunch = Exercise.create!(name: "Crunch", description: "The crunch is one of the most popular abdominal exercises. It involves the entire abs, but primarily it works the rectus abdominis muscle and also works the obliques.", muscle_target: "Core")
+bicecly = Exercise.create!(name: "Bicycle Crunch", description: "The bicycle crunch is an excellent exercise for building abdominal strength and toning your thighs. It is a variation of the standard crunch, and it is one of the most effective exercises for developing the abdominal muscles.", muscle_target: "Core")
+
 
 # Create ExerciseSets
 incline_bench_press_set = ExerciseSet.create!(exercise_id: incline_bench_press.id, routine_id: chest.id, reps: 10, set_number: 3)
@@ -51,11 +55,13 @@ squat_set = ExerciseSet.create!(exercise_id: squat.id, routine_id: legs.id, reps
 curl_set = ExerciseSet.create!(exercise_id: curl.id, routine_id: arms.id, reps: 10, set_number: 3)
 shoulder_press_set = ExerciseSet.create!(exercise_id: shoulder_press.id, routine_id: shoulders.id, reps: 10, set_number: 3)
 plank_set = ExerciseSet.create!(exercise_id: plank.id, routine_id: core.id, reps: 10, set_number: 3)
-
+sit_up_set = ExerciseSet.create!(exercise_id: sit_up.id, routine_id: core.id, reps: 10, set_number: 3)
+crunch_set = ExerciseSet.create!(exercise_id: crunch.id, routine_id: core.id, reps: 10, set_number: 3)
+bicycle_crunch_set = ExerciseSet.create!(exercise_id: bicecly.id, routine_id: core.id, reps: 10, set_number: 3)
 # Create Workouts
-chest_workout = Workout.create!(date: "2020-03-01", duration: 30, calories_burned: 300, user_id: henry.id, routine_id: chest.id)
-back_workout = Workout.create!(date: "2020-03-02", duration: 30, calories_burned: 300, user_id: henry.id, routine_id: back.id)
-legs_workout = Workout.create!(date: "2020-03-03", duration: 60, calories_burned: 550, user_id: will.id, routine_id: legs.id)
+chest_workout = Workout.create!(date: "2020-03-01", duration: 30, calories_burned: 300, notes: "OMG I DIED", user_id: henry.id, routine_id: chest.id)
+back_workout = Workout.create!(date: "2020-03-02", duration: 30, calories_burned: 300, notes: "Should probably check my form better next time...", user_id: henry.id, routine_id: back.id)
+legs_workout = Workout.create!(date: "2020-03-03", duration: 60, calories_burned: 550, notes: "I hate leg day.", user_id: will.id, routine_id: legs.id)
 
 
 

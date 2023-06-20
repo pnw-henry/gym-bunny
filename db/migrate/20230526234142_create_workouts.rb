@@ -4,6 +4,7 @@ class CreateWorkouts < ActiveRecord::Migration[7.0]
       t.date :date
       t.integer :duration
       t.integer :calories_burned
+      t.text :notes
       t.integer :user_id
       t.integer :routine_id
 

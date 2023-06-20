@@ -1,35 +1,35 @@
 class WorkoutsController < ApplicationController
     
     def index
-            workouts = Workout.all
-            render json: workouts, include: [:user, :routine]
+        workouts = Workout.all
+        render json: workouts, include: [:user, :routine, :sweats]
     end
     
     def show
-            workout = Workout.find_by(id: params[:id])
-            render json: workout, include: [:user, :routine]
+        workout = Workout.find_by(id: params[:id])
+        render json: workout, include: [:user, :routine, :sweats]
     end
     
     def create
-            workout = Workout.create(workout_params)
-            render json: workout
+        workout = Workout.create(workout_params)
+        render json: workout
     end
     
     def update
-            workout = Workout.find_by(id: params[:id])
-            workout.update(workout_params)
-            render json: workout
+        workout = Workout.find_by(id: params[:id])
+        workout.update(workout_params)
+        render json: workout
     end
     
     def destroy
-            workout = Workout.find_by(id: params[:id])
-            workout.destroy
-            render json: workout
+        workout = Workout.find_by(id: params[:id])
+        workout.destroy
+        render json: workout
     end
     
     private
     
     def workout_params
-            params.permit(:date, :duration, :calories_burned, :user_id, :routine_id)
+            params.permit(:date, :duration, :notes, :calories_burned, :user_id, :routine_id)
     end
 end

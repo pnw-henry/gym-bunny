@@ -45,47 +45,65 @@ function Landing() {
 
   return (
     <div className="landing">
-      <h2>Welcome to the Landing Page</h2>
+      <h2>Welcome to Gym Bunny</h2>
 
-      <div>
-        <h3>Your Favorite Routines</h3>
+      <div className="workout-routines">
         {favoriteRoutinesExist ? (
-          <div className="routine-list">
-            {favorites.map((favorite) => {
-              const routine = findRoutineById(favorite.routine_id);
-              return routine ? (
-                <div key={routine.id}>{routine.name}</div>
-              ) : null;
-            })}
+          <div>
+            <h3>Your Favorite Routines</h3>
+            <div>
+              {routinesToDisplay.map((routine) => {
+                return (
+                  <div key={routine.id}>
+                    <h4>{routine.name}</h4>
+                    <p>{routine.description}</p>
+                    <Link to={`/routines/${routine.id}`}>
+                      <img src={routine.routine_photo} alt={routine.name} />
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ) : (
-          <p>No favorite routines found.</p>
+          <div>
+            {routinesToDisplay.length > 0 ? (
+              <div>
+                {routinesToDisplay.map((routine) => (
+                  <>
+                    <div key={routine.id}>
+                      <h4>{routine.name}</h4>
+                      <p>{routine.description}</p>
+                      <Link to={`/routines/${routine.id}`}>
+                        <img src={routine.routine_photo} alt={routine.name} />
+                      </Link>
+                    </div>
+                  </>
+                ))}
+              </div>
+            ) : (
+              <p>No routines found.</p>
+            )}
+          </div>
         )}
       </div>
 
       <div>
         <h3>Latest Workouts</h3>
-        {latestWorkouts.length > 0 ? (
-          <div className="workout-list">
+        {latestWorkouts.length > 0 && user !== null ? (
+          <div className="latest-workouts">
             {latestWorkouts.map((workout) => (
-              <div key={workout.id}>{workout.date}</div>
+              <div key={workout.id}>
+                <p>On: {workout.date}</p>
+                <p>Time: {workout.duration}</p>
+                <p>Caroies: {workout.calories_burned}</p>
+              </div>
             ))}
           </div>
         ) : (
           <p>No workouts found.</p>
         )}
       </div>
-
-      {!favoriteRoutinesExist && (
-        <div>
-          <h3>Random Routines</h3>
-          <div className="routine-list">
-            {routinesToDisplay.map((routine) => (
-              <div key={routine.id}>{routine.name}</div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

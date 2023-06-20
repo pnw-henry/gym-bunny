@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import WorkoutCard from "./WorkoutCard";
 
 function Profile() {
-  const { user } = useContext(UserContext);
+  const { user, setUser, setIsLoggedIn } = useContext(UserContext);
   const { userWorkouts, setUserWorkouts } = useContext(WorkoutContext);
   const { routines } = useContext(RoutineContext);
+  const [avatar, setAvatar] = useState(null);
 
   console.log("user in profile", user);
   console.log("userWorkouts in profile", userWorkouts);
@@ -23,6 +24,31 @@ function Profile() {
         );
         setUserWorkouts(newWorkouts);
       }
+    });
+  };
+
+  function handleLogout() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.ok) {
+        setUser(null);
+        setIsLoggedIn(false);
+      }
+    });
+  }
+
+  const handleAvatarChange = (event) => {
+    setAvatar(event.target.files[0]);
+  };
+
+  const handleAvatarSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("avatar", avatar);
+    fetch(`/users/${user.id}`, {
+      method: "PATCH",
+      body: formData,
     });
   };
 
@@ -42,20 +68,38 @@ function Profile() {
 
   return (
     <div className="profile">
-      <h3>Profile</h3>
+      <h3>Workout Profile</h3>
       {user && (
         <>
+          <button onClick={handleLogout}>Logout</button>
+          <h2>{user.name}</h2>
           <p>Username: {user.username}</p>
           <p>Email: {user.email}</p>
+          <div className="avatar-photo">
+            {user.avatar && <img src={user.avatar} alt="avatar_photo" />}
+          </div>
+          <>
+            <input
+              type="file"
+              name="avatar"
+              accept="image/*"
+              multiple={false}
+              onChange={handleAvatarChange}
+            />
+            <button onClick={handleAvatarSubmit}>
+              {user.avatar ? "Change Photo" : "Upload Photo"}
+            </button>
+          </>
         </>
       )}
-      <h3>Workouts</h3>
       {userWorkouts.length > 0 ? (
         workoutCards
       ) : (
-        <p>You have no workouts. Create a workout!</p>
+        <>
+          <p>You have no workouts. Create a workout!</p>
+          <Link to="/routines">View Routines</Link>
+        </>
       )}
-      <Link to="/routines">View Routines</Link>
     </div>
   );
 }

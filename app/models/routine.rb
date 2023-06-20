@@ -5,6 +5,8 @@ class Routine < ApplicationRecord
     has_many :users, through: :workouts
     has_many :exercises, through: :exercise_sets
 
+    has_one_attached :routine_photo
+
     MUSCLE_GROUP = ["Arms", "Back", "Chest", "Core", "Legs", "Shoulders"]
 
     validates :name, presence: true, length: { maximum: 20 }

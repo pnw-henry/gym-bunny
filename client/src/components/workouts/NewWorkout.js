@@ -62,12 +62,13 @@ function NewWorkout() {
     const newSweatData = {
       ...sweatData,
       weight: 0,
-      sets: shouldShowSetInput ? userSetsValue : recommendedSets,
-      reps: shouldShowRepInput ? userRepsValue : recommendedReps,
+      sets: shouldShowSetInput ? parseInt(userSetsValue) : recommendedSets,
+      reps: shouldShowRepInput ? parseInt(userRepsValue) : recommendedReps,
       exercise_id: exerciseId,
       routine_id: routine.id,
       user_id: user.id,
     };
+    console.log("newSweatData:", newSweatData);
     fetch("/sweats", {
       method: "POST",
       headers: {
