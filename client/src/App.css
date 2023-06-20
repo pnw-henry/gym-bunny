@@ -1,28 +1,136 @@
-:root {
-  --brand-pink: hsl(313, 50%, 24%);
-  --brand-blue: #399fa6;
-  --bg-color: hsl(187, 8%, 98%);
-}
-
 .App {
   width: 1000px;
   min-height: 100vh;
-
-  background-color: hsl(187, 8%, 98%);
 }
 
 header {
-  padding: 1.5em 1.5em 0 1.5em;
+  padding-block: 1.5em 0;
   margin-bottom: 1em;
+
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 1em;
 }
 
 header .logo {
+  height: 6rem;
+}
+
+h1,
+h2 {
+  background-image: linear-gradient(
+    60deg,
+    var(--brand-mid),
+    var(--brand-darker)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+header h1 {
+  flex-grow: 1;
+  line-height: 1.2;
+}
+
+header nav {
+  display: flex;
+  gap: 1em;
+  margin-inline: 2em;
+}
+
+header .user-profile img {
   width: 3em;
   height: 3em;
+  object-fit: cover;
+  border-radius: 50%;
+  border: solid 3px var(--brand-mid);
+}
+
+.profile-card {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.profile-card .user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card .user-info .display-name {
+  margin: 0;
+}
+
+.profile-card .user-info .username {
+  margin: 0;
+  color: var(--brand-darker);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+/* ROUTINE CARD LIST */
+.routine-card-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+.routine-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.routine-card h4,
+.routine-card p {
+  margin-block: 0.25em;
+}
+
+.routine-card p {
+  color: var(--text-color-alt);
+}
+
+.routine-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75em;
+  border: solid 1px var(--border-color);
+}
+
+/* WORKOUT CARD */
+.workout-card-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+.workout-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.workout-card h4 {
+  margin-block: 0.12em;
+}
+.workout-card p {
+  margin-block: 0.12em;
+}
+
+.workout-card .workout-date {
+  color: var(--text-color-alt);
+}
+
+.workout-card .workout-details {
+  color: var(--brand-lighter);
+}
+
+.workout-card .workout-notes {
+  margin-block-start: 1em;
 }
 
 .logo {
@@ -32,4 +140,9 @@ header .logo {
   font-size: 2rem;
   display: flex;
   align-items: center;
+}
+
+img {
+  max-width: 300px;
+  max-height: 300px;
 }

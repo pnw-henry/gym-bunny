@@ -16,12 +16,6 @@ function Navigation() {
       >
         All Exercises
       </NavLink>
-      <NavLink
-        to="/profile"
-        className={(isActive) => "nav-link" + (!isActive ? " unselected" : "")}
-      >
-        Profile
-      </NavLink>
     </nav>
   );
 }

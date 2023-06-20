@@ -1,14 +1,57 @@
-body {
-  font-family: "Oxygen", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Poppins&display=swap");
 
-  color: #575757;
-  background-color: #ffffff;
+:root {
+  --brand-light: #ffe5f2;
+  --brand-lighter: #e599bf;
+  --brand-mid: #f266ab;
+  --brand-darker: #dd3c8b;
+  --brand-dark: #aa0958;
+
+  --text-color: #cccccc;
+  --text-color-alt: #999999;
+  --font-family: "Noto Sans", sans-serif;
+
+  --text-color-headings: var(--brand-darker);
+  --font-family-headings: "Poppins", sans-serif;
+
+  --bg-color: #202020;
+  --bg-color-alt: #333333;
+  --bg-color-alt-darker: #262626;
+
+  --border-color: #666666;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-family: var(--font-family);
 
   display: flex;
   justify-items: center;
   min-height: 100vh;
   margin: 0;
   padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-family-headings);
+  color: var(--text-color-headings);
+}
+
+a,
+a:visited {
+  color: var(--brand-lighter);
+  text-decoration: none;
+}
+
+a:active,
+a:hover {
+  color: var(--brand-mid);
+  text-decoration: none;
 }
 
 #root {

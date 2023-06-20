@@ -44,22 +44,20 @@ function Landing() {
     : getRandomRoutines();
 
   return (
-    <div className="landing">
-      <h2>Welcome to Gym Bunny</h2>
-
-      <div className="workout-routines">
+    <main className="landing">
+      <section className="workout-routines">
         {favoriteRoutinesExist ? (
           <div>
-            <h3>Your Favorite Routines</h3>
-            <div>
+            <h2>Your Favorite Routines</h2>
+            <div className="routine-card-list">
               {routinesToDisplay.map((routine) => {
                 return (
-                  <div key={routine.id}>
+                  <div className="routine-card" key={routine.id}>
                     <h4>{routine.name}</h4>
-                    <p>{routine.description}</p>
                     <Link to={`/routines/${routine.id}`}>
                       <img src={routine.routine_photo} alt={routine.name} />
                     </Link>
+                    <p>{routine.description}</p>
                   </div>
                 );
               })}
@@ -67,16 +65,17 @@ function Landing() {
           </div>
         ) : (
           <div>
+            <h2>Popular Routines</h2>
             {routinesToDisplay.length > 0 ? (
-              <div>
+              <div className="routine-card-list">
                 {routinesToDisplay.map((routine) => (
                   <>
-                    <div key={routine.id}>
+                    <div className="routine-card" key={routine.id}>
                       <h4>{routine.name}</h4>
-                      <p>{routine.description}</p>
                       <Link to={`/routines/${routine.id}`}>
                         <img src={routine.routine_photo} alt={routine.name} />
                       </Link>
+                      <p>{routine.description}</p>
                     </div>
                   </>
                 ))}
@@ -86,25 +85,33 @@ function Landing() {
             )}
           </div>
         )}
-      </div>
+      </section>
 
-      <div>
-        <h3>Latest Workouts</h3>
+      <section>
+        <h2>Latest Workouts</h2>
         {latestWorkouts.length > 0 && user !== null ? (
-          <div className="latest-workouts">
+          <div className="latest-workouts workout-card-list">
             {latestWorkouts.map((workout) => (
-              <div key={workout.id}>
-                <p>On: {workout.date}</p>
-                <p>Time: {workout.duration}</p>
-                <p>Caroies: {workout.calories_burned}</p>
+              <div className="workout-card" key={workout.id}>
+                <h4>Routine Name</h4>
+                <p className="workout-date">
+                  {new Date(workout.date).toLocaleDateString(
+                    navigator.language,
+                    { dateStyle: "full" }
+                  )}
+                </p>
+                <p className="workout-details">
+                  {workout.duration} minutes • {workout.calories_burned} cals
+                </p>
+                <p className="workout-notes">{workout.notes}</p>
               </div>
             ))}
           </div>
         ) : (
           <p>No workouts found.</p>
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
