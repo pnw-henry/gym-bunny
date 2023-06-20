@@ -4,6 +4,7 @@ import { WorkoutContext } from "../workouts/WorkoutContext";
 import { RoutineContext } from "../routines/RoutineContext";
 import { UserContext } from "../users/UserContext";
 import { useContext, useState, useEffect } from "react";
+import LandingCards from "./LandingCards";
 
 function Landing() {
   const { user } = useContext(UserContext);
@@ -51,15 +52,7 @@ function Landing() {
             <h2>Your Favorite Routines</h2>
             <div className="routine-card-list">
               {routinesToDisplay.map((routine) => {
-                return (
-                  <div className="routine-card" key={routine.id}>
-                    <h4>{routine.name}</h4>
-                    <Link to={`/routines/${routine.id}`}>
-                      <img src={routine.routine_photo} alt={routine.name} />
-                    </Link>
-                    <p>{routine.description}</p>
-                  </div>
-                );
+                return <LandingCards routine={routine} key={routine.id} />;
               })}
             </div>
           </div>
@@ -69,15 +62,7 @@ function Landing() {
             {routinesToDisplay.length > 0 ? (
               <div className="routine-card-list">
                 {routinesToDisplay.map((routine) => (
-                  <>
-                    <div className="routine-card" key={routine.id}>
-                      <h4>{routine.name}</h4>
-                      <Link to={`/routines/${routine.id}`}>
-                        <img src={routine.routine_photo} alt={routine.name} />
-                      </Link>
-                      <p>{routine.description}</p>
-                    </div>
-                  </>
+                  <LandingCards routine={routine} key={routine.id} />
                 ))}
               </div>
             ) : (
@@ -91,21 +76,26 @@ function Landing() {
         <h2>Latest Workouts</h2>
         {latestWorkouts.length > 0 && user !== null ? (
           <div className="latest-workouts workout-card-list">
-            {latestWorkouts.map((workout) => (
-              <div className="workout-card" key={workout.id}>
-                <h4>Routine Name</h4>
-                <p className="workout-date">
-                  {new Date(workout.date).toLocaleDateString(
-                    navigator.language,
-                    { dateStyle: "full" }
-                  )}
-                </p>
-                <p className="workout-details">
-                  {workout.duration} minutes • {workout.calories_burned} cals
-                </p>
-                <p className="workout-notes">{workout.notes}</p>
-              </div>
-            ))}
+            {latestWorkouts.map((workout) => {
+              const routine = findRoutineById(workout.routine_id);
+              return (
+                <div className="workout-card" key={workout.id}>
+                  <Link to={`/routines/${routine.id}`}>
+                    <h4>{routine.name}</h4>
+                  </Link>
+                  <p className="workout-date">
+                    {new Date(workout.date).toLocaleDateString(
+                      navigator.language,
+                      { dateStyle: "full" }
+                    )}
+                  </p>
+                  <p className="workout-details">
+                    {workout.duration} minutes • {workout.calories_burned} cals
+                  </p>
+                  <p className="workout-notes">{workout.notes}</p>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <p>No workouts found.</p>
