@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import { RoutineContext } from "../routines/RoutineContext";
 import { WorkoutContext } from "../workouts/WorkoutContext";
 
-function SignUp({ errors, setErrors, toggleSignup, signUp }) {
+function SignUp({ toggleSignup, signUp }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const { setUser, setIsLoggedIn } = useContext(UserContext);
   const { setFavorites } = useContext(RoutineContext);

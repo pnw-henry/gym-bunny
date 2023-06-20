@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { WorkoutContext } from "../workouts/WorkoutContext";
 import { RoutineContext } from "../routines/RoutineContext";
 import { UserContext } from "../users/UserContext";
-import { useContext, useState, useEffect } from "react";
 import LandingCards from "./LandingCards";
+import WorkoutCard from "../workouts/WorkoutCard";
 
 function Landing() {
   const { user } = useContext(UserContext);
@@ -43,7 +43,6 @@ function Landing() {
   const routinesToDisplay = favoriteRoutinesExist
     ? favorites.map((favorite) => findRoutineById(favorite.routine_id))
     : getRandomRoutines();
-
   return (
     <main className="landing">
       <section className="workout-routines">
@@ -52,6 +51,7 @@ function Landing() {
             <h2>Your Favorite Routines</h2>
             <div className="routine-card-list">
               {routinesToDisplay.map((routine) => {
+                console.log(routine);
                 return <LandingCards routine={routine} key={routine.id} />;
               })}
             </div>
@@ -76,29 +76,15 @@ function Landing() {
         <h2>Latest Workouts</h2>
         {latestWorkouts.length > 0 && user !== null ? (
           <div className="latest-workouts workout-card-list">
-            {latestWorkouts.map((workout) => {
-              const routine = findRoutineById(workout.routine_id);
-              return (
-                <div className="workout-card" key={workout.id}>
-                  <Link to={`/routines/${routine.id}`}>
-                    <h4>{routine.name}</h4>
-                  </Link>
-                  <p className="workout-date">
-                    {new Date(workout.date).toLocaleDateString(
-                      navigator.language,
-                      { dateStyle: "full" }
-                    )}
-                  </p>
-                  <p className="workout-details">
-                    {workout.duration} minutes • {workout.calories_burned} cals
-                  </p>
-                  <p className="workout-notes">{workout.notes}</p>
-                </div>
-              );
-            })}
+            {latestWorkouts.map((workout) => (
+              <WorkoutCard workout={workout} key={workout.id} />
+            ))}
           </div>
         ) : (
-          <p>No workouts found.</p>
+          <div>
+            <p>You haven't done any workouts.</p>
+            <Link to="/routines">Find a workout routine!</Link>
+          </div>
         )}
       </section>
     </main>

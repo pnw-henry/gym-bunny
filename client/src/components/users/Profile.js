@@ -8,11 +8,12 @@ import WorkoutCard from "./WorkoutCard";
 function Profile() {
   const { user, setUser, setIsLoggedIn } = useContext(UserContext);
   const { userWorkouts, setUserWorkouts } = useContext(WorkoutContext);
-  const { routines } = useContext(RoutineContext);
+  const { routines, setFavorites } = useContext(RoutineContext);
   const [avatar, setAvatar] = useState(null);
 
-  console.log("user in profile", user);
-  console.log("userWorkouts in profile", userWorkouts);
+  if (!user) {
+    return <div></div>;
+  }
 
   const handleDeleteWorkout = (workoutId) => {
     fetch(`/workouts/${workoutId}`, {
@@ -34,6 +35,8 @@ function Profile() {
       if (response.ok) {
         setUser(null);
         setIsLoggedIn(false);
+        setUserWorkouts([]);
+        setFavorites([]);
       }
     });
   }
@@ -52,7 +55,7 @@ function Profile() {
     });
   };
 
-  const workoutCards = userWorkouts.map((workout) => {
+  userWorkouts.map((workout) => {
     const routine = routines.find(
       (routine) => routine.id === workout.routine_id
     );
@@ -67,40 +70,64 @@ function Profile() {
   });
 
   return (
-    <div className="profile">
-      <h3>Workout Profile</h3>
-      {user && (
-        <>
-          <button onClick={handleLogout}>Logout</button>
-          <h2>{user.name}</h2>
-          <p>Username: {user.username}</p>
-          <p>Email: {user.email}</p>
-          <div className="avatar-photo">
-            {user.avatar && <img src={user.avatar} alt="avatar_photo" />}
+    <main className="profile">
+      {user ? (
+        <section>
+          <div className="profile-details">
+            <h2>{user.name}</h2>
+            {user.avatar && (
+              <img
+                className="avatar-photo"
+                src={user.avatar}
+                alt={`${user.name}'s avatar`}
+              />
+            )}
+            <p>{user.email}</p>
+            <button onClick={handleLogout}>Logout</button>
           </div>
-          <>
-            <input
-              type="file"
-              name="avatar"
-              accept="image/*"
-              multiple={false}
-              onChange={handleAvatarChange}
-            />
-            <button onClick={handleAvatarSubmit}>
-              {user.avatar ? "Change Photo" : "Upload Photo"}
-            </button>
-          </>
-        </>
-      )}
-      {userWorkouts.length > 0 ? (
-        workoutCards
+          {!user.avatar && (
+            <div className="avatar-upload">
+              <input
+                type="file"
+                name="avatar"
+                accept="image/*"
+                multiple={false}
+                onChange={handleAvatarChange}
+              />
+              <button onClick={handleAvatarSubmit}>
+                {user.avatar ? "Change Photo" : "Upload Photo"}
+              </button>
+            </div>
+          )}
+          <div className="profile workouts">
+            {userWorkouts.length === 0 ? (
+              <div>
+                <p>You have no workouts.</p>
+                <Link to="/routines">Browse Workout Routines</Link>
+              </div>
+            ) : (
+              <div>
+                <h2>Workouts</h2>
+                {userWorkouts.map((workout) => {
+                  return (
+                    <WorkoutCard
+                      key={workout.id}
+                      workout={workout}
+                      onDeleteWorkout={handleDeleteWorkout}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
       ) : (
-        <>
-          <p>You have no workouts. Create a workout!</p>
-          <Link to="/routines">View Routines</Link>
-        </>
+        <div>
+          <p>Please login or sign up</p>
+          <Link to="/login">Login</Link>
+        </div>
       )}
-    </div>
+    </main>
   );
 }
 

@@ -73,6 +73,25 @@ main {
   gap: 2em;
 }
 
+button {
+  border: solid 1px var(--brand-lighter);
+  border-radius: 3em;
+
+  background-color: var(--brand-darker);
+  padding: 0.5em 2em;
+  font-size: 1.1em;
+  font-weight: 400;
+  font-family: var(--font-family--headings);
+  /* width: 8em; */
+
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--brand-dark);
+}
+
 /* ROUTINE CARD LIST */
 .routine-card-list {
   display: grid;
@@ -164,7 +183,7 @@ main {
   font-family: var(--font-family);
   font-weight: 100;
 
-  text-align: center;
+  text-align: left;
 }
 
 .routines-container .search input:focus {
@@ -174,7 +193,7 @@ main {
 
 .routines-container .search input::placeholder {
   color: var(--brand-mid);
-  text-align: center;
+  text-align: left;
 }
 
 .routines-container .search-filters {
@@ -250,6 +269,30 @@ main {
   height: 33px;
   border: none;
   cursor: pointer;
+}
+
+/* ROUTINE DETAILS PAGE */
+.routine-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+  padding-inline: 10%;
+}
+
+.routine-exercise-photo {
+  width: 50em;
+  height: 30em;
+  object-fit: cover;
+  border-radius: 0.75em;
+  border: solid 1px var(--border-color);
+}
+
+.routine-exercises .routine-exercise-card .routine-exercise-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+  height: 100%;
 }
 
 /* WORKOUT PROGRESS */
@@ -356,7 +399,7 @@ main {
   font-family: var(--font-family);
   font-weight: 100;
 
-  text-align: right;
+  text-align: left;
 }
 
 .workout-form input:focus,
@@ -390,21 +433,77 @@ main {
   align-items: flex-start;
   gap: 1em;
 }
-button {
-  border: solid 1px var(--brand-lighter);
-  border-radius: 3em;
 
-  background-color: var(--brand-darker);
-  padding: 0.5em 2em;
-  font-size: 1.1em;
-  font-weight: 400;
-  font-family: var(--font-family--headings);
-  /* width: 8em; */
+/* EXERCISE PAGE */
 
-  color: var(--text-color);
-  cursor: pointer;
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+
+  padding-inline: 15%;
 }
 
-button:hover {
-  background-color: var(--brand-dark);
+.exercise-list .exercise-card {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+}
+
+.exercise-list .exercise-card img {
+  width: 12em;
+  height: 8.5em;
+  object-fit: cover;
+  border-radius: 0.75em;
+  border: solid 1px var(--border-color);
+}
+
+.exercise-list .exercise-card .exercise-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+  height: 100%;
+}
+
+.exercise-container .exercise-filters {
+  display: flex;
+  flex-direction: row;
+
+  color: var(--brand-mid);
+  padding-inline: 2em;
+}
+
+.exercise-container .exercise-filters :first-child {
+  flex-grow: 1;
+}
+
+/* PROFILE */
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: left;
+}
+
+.profile-details button {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  width: 15%;
+}
+
+.avatar-photo {
+  width: 15em;
+  height: 15em;
+  object-fit: cover;
+  border-radius: 0.75em;
+  border: solid 1px var(--border-color);
 }

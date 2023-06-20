@@ -72,7 +72,6 @@ function App() {
         console.log(error);
       });
   }, [setIsLoggedIn, setUser]);
-  console.log("user workouts", userWorkouts);
 
   return (
     <ExerciseContext.Provider

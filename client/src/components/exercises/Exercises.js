@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ExerciseList from "./ExerciseList";
 import MuscleFilter from "./MuscleFilter";
 import { ExerciseContext } from "./ExerciseContext";
-import { UserContext } from "../users/UserContext";
-import { useContext } from "react";
 
 function Exercises() {
   const { exercises, selectedExercises } = useContext(ExerciseContext);
-  const { user } = useContext(UserContext);
   const [targetMuscle, setTargetMuscle] = useState("");
   const [showSelected, setShowSelected] = useState(false);
 
@@ -34,19 +31,22 @@ function Exercises() {
   });
 
   return (
-    <div className="exercises-container">
-      <MuscleFilter
-        targetMuscle={targetMuscle}
-        onTargetMuscleSelect={setTargetMuscle}
-      />
-      <button className="show-exercises" onClick={handleShowSelected}>
-        {showSelected ? "Show All Exercises" : "Show Selected Exercises"}
-      </button>
-      {showSelected ? <h1>Selected Exercises</h1> : <h1>All Exercises</h1>}
-      <ExerciseList
-        exercises={showSelected ? selectedExercises : filteredExercises}
-      />
-    </div>
+    <main className="exercise-container">
+      <section className="exercise-filters">
+        <MuscleFilter
+          targetMuscle={targetMuscle}
+          onTargetMuscleSelect={setTargetMuscle}
+        />
+        <button className="show-exercises" onClick={handleShowSelected}>
+          {showSelected ? "Show All Exercises" : "Show Selected Exercises"}
+        </button>
+      </section>
+      <section>
+        <ExerciseList
+          exercises={showSelected ? selectedExercises : filteredExercises}
+        />
+      </section>
+    </main>
   );
 }
 

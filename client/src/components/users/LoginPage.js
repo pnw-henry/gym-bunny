@@ -5,7 +5,6 @@ import { UserContext } from "./UserContext";
 import { useContext } from "react";
 
 function LoginPage() {
-  const [errors, setErrors] = useState([]);
   const [signUp, setSignUp] = useState(false);
 
   const { user, setUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
@@ -36,21 +35,11 @@ function LoginPage() {
         <div className="login-signup-button">
           {signUp ? (
             <div className="signup">
-              <SignUp
-                errors={errors}
-                setErrors={setErrors}
-                toggleSignup={toggleSignup}
-                signUp={signUp}
-              />
+              <SignUp toggleSignup={toggleSignup} signUp={signUp} />
             </div>
           ) : (
             <div className="login">
-              <Login
-                errors={errors}
-                setErrors={setErrors}
-                toggleSignup={toggleSignup}
-                signUp={signUp}
-              />
+              <Login toggleSignup={toggleSignup} signUp={signUp} />
             </div>
           )}
         </div>

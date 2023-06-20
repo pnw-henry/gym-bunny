@@ -18,6 +18,7 @@ function WorkoutProgress() {
   const [notes, setNotes] = useState("");
   const [isPlaceHolderVisible, setIsPlacedHolderVisible] = useState(true);
   const navigate = useNavigate();
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     const workout = userWorkouts.find(
@@ -28,12 +29,13 @@ function WorkoutProgress() {
         (routine) => routine.id === workout.routine_id
       );
       if (routine) {
-        const filteredSweats = routine.exercises.reduce(
+        /*const filteredSweats = routine.exercises.reduce(
           (accumulator, exercise) => {
             const exerciseSweats = user.sweats.filter(
               (sweat) =>
                 sweat.routine_id === routine.id &&
-                sweat.exercise_id === exercise.id
+                sweat.exercise_id === exercise.id &&
+                sweat.workout_id === workout.id
             );
             if (exerciseSweats.length > 0) {
               exerciseSweats.sort(
@@ -46,6 +48,7 @@ function WorkoutProgress() {
           []
         );
         setRoutineSweats(filteredSweats);
+        */
         setWorkout(workout);
         setRoutine(routine);
       }
@@ -138,6 +141,8 @@ function WorkoutProgress() {
         ...sweat,
       };
     });
+    console.log("Sweat Data:", sweatData);
+    const updatedSweats = [...userSweats];
     sweatData.forEach((sweat) => {
       fetch("/sweats", {
         method: "POST",
@@ -145,16 +150,21 @@ function WorkoutProgress() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(sweat),
-      })
-        .then((response) => response.json())
-        .then((sweat) => {
-          console.log("Sweat Post Success:", sweat);
-          setUserSweats([...userSweats, sweat]);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      }).then((response) => {
+        if (response.ok) {
+          response.json().then((sweat) => {
+            console.log("Sweat Post Success:", sweat);
+            updatedSweats.push(sweat);
+          });
+        } else {
+          response.json().then((errorData) => {
+            console.log("Sweat Post Errors:", errorData);
+            setErrors([...errors, errorData.errors]);
+          });
+        }
+      });
     });
+    setUserSweats(updatedSweats);
     const workoutData = {
       ...workout,
       duration: duration,
@@ -168,16 +178,27 @@ function WorkoutProgress() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(workoutData),
-    })
-      .then((response) => response.json())
-      .then((workout) => {
-        console.log("Workout Patch Success:", workout);
-        setUserWorkouts([...userWorkouts, workout]);
-        navigate("/profile");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((workout) => {
+          console.log("Workout Patch Success:", workout);
+          const updatedWorkouts = userWorkouts.map((userWorkout) => {
+            if (userWorkout.id === workout.id) {
+              return workout;
+            } else {
+              return userWorkout;
+            }
+          });
+          setUserWorkouts(updatedWorkouts);
+          navigate("/profile");
+        });
+      } else {
+        response.json().then((errorData) => {
+          console.log("Workout Patch Errors:", errorData);
+          setErrors([...errors, errorData.errors]);
+        });
+      }
+    });
   };
 
   if (workout.length === 0 || routine.length === 0) {
@@ -213,6 +234,7 @@ function WorkoutProgress() {
                 <div className="exercise-form">
                   <div className="exercise-form-field">
                     <input
+                      type="number"
                       id={`sets${index}`}
                       name={`sets${index}`}
                       value={sweat ? sweat.sets : predefinedSetsNumber}
@@ -230,6 +252,7 @@ function WorkoutProgress() {
                   <p>x</p>
                   <div className="exercise-form-field">
                     <input
+                      type="number"
                       id={`reps${index}`}
                       name={`reps${index}`}
                       value={sweat ? sweat.reps : predefinedReps}
@@ -247,6 +270,7 @@ function WorkoutProgress() {
                   <p>@</p>
                   <div className="exercise-form-field">
                     <input
+                      type="number"
                       id={`weight${index}`}
                       name={`weight${index}`}
                       value={sweat ? sweat.weight : predefinedWeight}
@@ -298,6 +322,13 @@ function WorkoutProgress() {
       <div className="workout-progress-buttons">
         <button onClick={handleSubmit}>Submit</button>
       </div>
+      {errors.length > 0 ? (
+        <div className="errors">
+          {errors.map((error) => (
+            <p key={error}>{error}</p>
+          ))}
+        </div>
+      ) : null}
     </main>
   );
 }

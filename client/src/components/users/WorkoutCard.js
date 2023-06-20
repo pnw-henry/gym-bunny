@@ -1,20 +1,27 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./UserContext";
 import { WorkoutContext } from "../workouts/WorkoutContext";
-import { ExerciseContext } from "../exercises/ExerciseContext";
+import { RoutineContext } from "../routines/RoutineContext";
 import { Link } from "react-router-dom";
 
-function WorkoutCard({ workout, routine, onDeleteWorkout }) {
+function WorkoutCard({ workout, onDeleteWorkout }) {
   const [showDetails, setShowDetails] = useState(false);
   const { id, date, duration, calories_burned } = workout;
   const { user } = useContext(UserContext);
   const { userWorkouts, setUserWorkouts, userSweats } =
     useContext(WorkoutContext);
-  const { exercises } = useContext(ExerciseContext);
+  const { routines } = useContext(RoutineContext);
   const [editing, setEditing] = useState(false);
   const [editedNotes, setEditedNotes] = useState(workout.notes);
   const [errors, setErrors] = useState([]);
   const workoutApi = `/workouts/${id}`;
+
+  console.log("workout", workout);
+  console.log("userWorkouts", userWorkouts);
+  console.log("userSweats", userSweats);
+
+  const routine = routines.find((routine) => routine.id === workout.routine_id);
+  console.log("routine", routine);
 
   const handleEditClick = () => {
     setEditing(true);
@@ -74,7 +81,7 @@ function WorkoutCard({ workout, routine, onDeleteWorkout }) {
 
   return (
     <div className="workout-container">
-      {user ? (
+      {user && routine && (
         <div>
           <h2>{routine.name}</h2>
           <p>Date: {date}</p>
@@ -107,21 +114,23 @@ function WorkoutCard({ workout, routine, onDeleteWorkout }) {
                 {userSweats.length !== 0 ? (
                   <div>
                     <h3>Exercises</h3>
-                    {exercises.map((exercise) => (
+                    {routine.exercises.map((exercise) => (
                       <div key={exercise.id}>
-                        {userSweats.map((sweat) => (
-                          <div key={sweat.id}>
-                            {sweat.exercise_id === exercise.id &&
-                              sweat.workout_id === workout.id && (
-                                <div>
-                                  <p>{exercise.name}</p>
-                                  <p>Weight: {sweat.weight} lbs</p>
-                                  <p>Reps: {sweat.reps}</p>
-                                  <p>Sets: {sweat.sets}</p>
-                                </div>
-                              )}
-                          </div>
-                        ))}
+                        {userSweats.map((sweat) => {
+                          return (
+                            <div key={sweat.id}>
+                              {sweat.exercise_id === exercise.id &&
+                                sweat.workout_id === workout.id && (
+                                  <div>
+                                    <p>{exercise.name}</p>
+                                    <p>Weight: {sweat.weight} lbs</p>
+                                    <p>Reps: {sweat.reps}</p>
+                                    <p>Sets: {sweat.sets}</p>
+                                  </div>
+                                )}
+                            </div>
+                          );
+                        })}
                       </div>
                     ))}
                   </div>
@@ -139,10 +148,6 @@ function WorkoutCard({ workout, routine, onDeleteWorkout }) {
               </div>
             </div>
           )}
-        </div>
-      ) : (
-        <div>
-          <p>Login First</p>
         </div>
       )}
     </div>

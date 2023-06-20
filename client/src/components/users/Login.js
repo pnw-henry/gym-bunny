@@ -5,13 +5,14 @@ import { UserContext } from "./UserContext";
 import { RoutineContext } from "../routines/RoutineContext";
 import { WorkoutContext } from "../workouts/WorkoutContext";
 
-function Login({ errors, setErrors, toggleSignup, signUp }) {
+function Login({ toggleSignup, signUp }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setUser, setIsLoggedIn } = useContext(UserContext);
   const { setFavorites } = useContext(RoutineContext);
   const { setUserWorkouts, setUserSweats } = useContext(WorkoutContext);
   const navigate = useNavigate();
+  const [errors, setErrors] = useState([]);
 
   const loginApi = "/login";
 
@@ -41,7 +42,8 @@ function Login({ errors, setErrors, toggleSignup, signUp }) {
         });
       } else {
         response.json().then((errorData) => {
-          setErrors(errorData.errors);
+          console.log(errorData);
+          setErrors(errorData);
         });
       }
     });

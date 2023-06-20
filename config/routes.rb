@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   resources :exercises, only: [:index, :show, :update]
   resources :routines, only: [:index, :show, :update]
   resources :workouts
-  resources :exercise_sets
+  resources :exercise_sets, only: [:index, :show]
   resources :sweats
-  resources :favorites, only: [:index, :create, :destroy]
+  resources :favorites, only: [:create, :destroy]
   resources :users, only: [:create, :destroy, :update]
 
   get "/me", to: "users#show"

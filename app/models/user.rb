@@ -7,7 +7,7 @@ class User < ApplicationRecord
     has_secure_password
     has_one_attached :avatar
 
-    validates :name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+    validates :name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "Name must contain only letters" }
     validates :email, presence: true, uniqueness: true, confirmation: { case_sensitive: false }
     validates :email_confirmation, presence: true
     validates :username, presence: true, uniqueness: true
