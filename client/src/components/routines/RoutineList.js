@@ -16,7 +16,10 @@ function RoutineList({ routines, onAddFavorite, onRemoveFavorite }) {
       {routineCards.length > 0 ? (
         routineCards
       ) : (
-        <h2>No routines found. Please try again.</h2>
+        <p className="not-found">
+          No routines found. <br />
+          Please try again.
+        </p>
       )}
     </div>
   );

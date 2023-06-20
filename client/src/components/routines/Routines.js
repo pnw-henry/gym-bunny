@@ -47,28 +47,34 @@ function Routines() {
   };
 
   return (
-    <div className="routines-container">
-      <RoutineSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <TargetMuscleFilter
-        targetMuscle={targetMuscle}
-        setTargetMuscle={setTargetMuscle}
-      />
-      <input
-        type="checkbox"
-        id="favorites"
-        name="favorites"
-        value="favorites"
-        checked={showFavorites}
-        onChange={toggleFavorites}
-      />
-      <label htmlFor="favorites">Show Favorites</label>
-      <h1>Routines</h1>
-      <RoutineList
-        routines={filteredRoutines}
-        onAddFavorite={handleAddFavorite}
-        onRemoveFavorite={handleRemoveFavorite}
-      />
-    </div>
+    <main className="routines-container">
+      <section className="search">
+        <RoutineSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+        <div className="search-filters">
+          <TargetMuscleFilter
+            targetMuscle={targetMuscle}
+            setTargetMuscle={setTargetMuscle}
+          />
+          <input
+            type="checkbox"
+            id="favorites"
+            name="favorites"
+            value="favorites"
+            checked={showFavorites}
+            onChange={toggleFavorites}
+          />
+          <label htmlFor="favorites">Show Favorites</label>
+        </div>
+      </section>
+      <section>
+        <RoutineList
+          routines={filteredRoutines}
+          onAddFavorite={handleAddFavorite}
+          onRemoveFavorite={handleRemoveFavorite}
+        />
+      </section>
+    </main>
   );
 }
 

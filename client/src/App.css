@@ -134,7 +134,6 @@ main {
 }
 
 .logo {
-  fill: url(#GradientFill);
   width: 1.5em;
   height: 1.5em;
   font-size: 2rem;
@@ -142,7 +141,112 @@ main {
   align-items: center;
 }
 
-img {
-  max-width: 300px;
-  max-height: 300px;
+/* ROUTINES LIST PAGE */
+
+/* ROUTINES SEARCH */
+.routines-container .search {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  padding-inline: 25%;
+  padding-block: 2em;
+}
+.routines-container .search input {
+  border: solid 1px var(--brand-lighter);
+  border-radius: 3em;
+
+  background-color: var(--bg-color-alt);
+  padding: 1em;
+  font-size: 1.2em;
+
+  color: var(--brand-light);
+  font-family: var(--font-family);
+  font-weight: 100;
+
+  text-align: center;
+}
+
+.routines-container .search input:focus {
+  outline: none;
+  border: solid 1px var(--brand-mid);
+}
+
+.routines-container .search input::placeholder {
+  color: var(--brand-mid);
+  text-align: center;
+}
+
+.routines-container .search-filters {
+  display: flex;
+  flex-direction: row;
+
+  color: var(--brand-mid);
+  padding-inline: 2em;
+}
+
+.routines-container .search-filters :first-child {
+  flex-grow: 1;
+}
+
+.routine-list .not-found {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 100;
+  color: var(--brand-mid);
+}
+
+.routine-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+
+  padding-inline: 15%;
+}
+
+.routine-card {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+}
+
+.routine-list .routine-card img {
+  width: 10em;
+  height: 6.5em;
+  object-fit: cover;
+  border-radius: 0.75em;
+  border: solid 1px var(--border-color);
+}
+.routine-list .routine-card .routine-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+  height: 100%;
+}
+
+.routine-list .routine-card .routine-details h3 {
+  margin-block: 0 0.25em;
+  line-height: 1.1;
+}
+
+.routine-list .routine-card .routine-details .owner {
+  font-size: 0.8em;
+  color: var(--brand-lighter);
+}
+
+.routine-list .routine-card .btn-favorite {
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.routine-list .routine-card .btn-favorite img {
+  width: 34px;
+  height: 33px;
+  border: none;
+  cursor: pointer;
 }

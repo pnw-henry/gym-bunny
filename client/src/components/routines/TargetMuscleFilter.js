@@ -19,7 +19,7 @@ function TargetMuscleFilter({ targetMuscle, setTargetMuscle }) {
 
   return (
     <div>
-      <label htmlFor="target-muscle">Target Muscle:</label>
+      <label htmlFor="target-muscle">Target Muscle: </label>
       <select
         name="target-muscle"
         id="target-muscle"

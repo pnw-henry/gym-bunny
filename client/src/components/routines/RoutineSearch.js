@@ -6,14 +6,12 @@ function RoutineSearch({ searchTerm, setSearchTerm }) {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search routines..."
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-    </div>
+    <input
+      type="text"
+      placeholder="Search routines..."
+      value={searchTerm}
+      onChange={handleSearch}
+    />
   );
 }
 

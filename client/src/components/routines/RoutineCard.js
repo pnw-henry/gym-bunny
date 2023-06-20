@@ -56,8 +56,6 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
 
   return (
     <div className="routine-card">
-      <h2>{name}</h2>
-      <p>{description}</p>
       <Link to={`/routines/${id}`}>
         <div className="routine-photo">
           {routine.routine_photo && (
@@ -65,12 +63,24 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
           )}
         </div>
       </Link>
-      <p>By: {owner}</p>
+      <div className="routine-details">
+        <h3>{name}</h3>
+        <p>{description}</p>
+        <p className="owner">{owner}</p>
+      </div>
+
       {user && !favorites.find((favorite) => favorite.routine_id === id) && (
-        <button onClick={handleAddFavorite}>Add Favorite</button>
+        <button className="btn-favorite" onClick={handleAddFavorite}>
+          <img src="/favorite-empty.svg" />
+        </button>
       )}
       {user && favorites.find((favorite) => favorite.routine_id === id) && (
-        <button onClick={handleDeleteFavorite}>Remove Favorite</button>
+        <button
+          className="btn-favorite selected"
+          onClick={handleDeleteFavorite}
+        >
+          <img src="/favorite-filled.svg" />
+        </button>
       )}
     </div>
   );
