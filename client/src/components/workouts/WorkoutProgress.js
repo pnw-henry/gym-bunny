@@ -185,74 +185,90 @@ function WorkoutProgress() {
   }
 
   return (
-    <div className="workout-progress">
-      <h3>Workout Progress</h3>
-      <p>{routine.name}</p>
-      {routine.exercises.map((exercise, index) => {
-        const sweat = routineSweats.find(
-          (sweat) => sweat && sweat.exercise_id === exercise.id
-        );
-        const predefinedSets = routine.exercise_sets.find(
-          (set) => set.exercise_id === exercise.id
-        );
-        const predefinedReps = predefinedSets ? predefinedSets.reps : "";
-        const predefinedSetsNumber = predefinedSets
-          ? predefinedSets.set_number
-          : "";
-        const predefinedWeight = 0;
-        return (
-          <div key={exercise.id} className="exercise-item">
-            <h4>{exercise.name}</h4>
-            <div className="exercise-form">
-              <label htmlFor={`sets${index}`}>Sets:</label>
-              <input
-                type="number"
-                id={`sets${index}`}
-                name={`sets${index}`}
-                value={sweat ? sweat.sets : predefinedSetsNumber}
-                onChange={(e) =>
-                  handleSetsChange(
-                    index,
-                    e.target.value,
-                    predefinedReps,
-                    predefinedWeight
-                  )
-                }
+    <main className="workout-progress">
+      <h2>Workout Progress: {routine.name}</h2>
+      <div className="exercise-list">
+        {routine.exercises.map((exercise, index) => {
+          const sweat = routineSweats.find(
+            (sweat) => sweat && sweat.exercise_id === exercise.id
+          );
+          const predefinedSets = routine.exercise_sets.find(
+            (set) => set.exercise_id === exercise.id
+          );
+          const predefinedReps = predefinedSets ? predefinedSets.reps : "";
+          const predefinedSetsNumber = predefinedSets
+            ? predefinedSets.set_number
+            : "";
+          const predefinedWeight = 0;
+          return (
+            <div key={exercise.id} className="exercise-item">
+              <img
+                src={exercise.exercise_photo}
+                alt={`Image of ${exercise.name}`}
               />
-              <label htmlFor={`reps${index}`}>Reps:</label>
-              <input
-                type="number"
-                id={`reps${index}`}
-                name={`reps${index}`}
-                value={sweat ? sweat.reps : predefinedReps}
-                onChange={(e) =>
-                  handleRepsChange(
-                    index,
-                    e.target.value,
-                    predefinedWeight,
-                    predefinedSetsNumber
-                  )
-                }
-              />
-              <label htmlFor={`weight${index}`}>Weight (lbs):</label>
-              <input
-                type="number"
-                id={`weight${index}`}
-                name={`weight${index}`}
-                value={sweat ? sweat.weight : predefinedWeight}
-                onChange={(e) =>
-                  handleWeightChange(
-                    index,
-                    e.target.value,
-                    predefinedReps,
-                    predefinedSetsNumber
-                  )
-                }
-              />
+
+              <div className="exercise-card-details">
+                <h3>{exercise.name}</h3>
+
+                <div className="exercise-form">
+                  <div className="exercise-form-field">
+                    <input
+                      id={`sets${index}`}
+                      name={`sets${index}`}
+                      value={sweat ? sweat.sets : predefinedSetsNumber}
+                      onChange={(e) =>
+                        handleSetsChange(
+                          index,
+                          e.target.value,
+                          predefinedReps,
+                          predefinedWeight
+                        )
+                      }
+                    />
+                    <label htmlFor={`sets${index}`}>Sets</label>
+                  </div>
+                  <p>x</p>
+                  <div className="exercise-form-field">
+                    <input
+                      id={`reps${index}`}
+                      name={`reps${index}`}
+                      value={sweat ? sweat.reps : predefinedReps}
+                      onChange={(e) =>
+                        handleRepsChange(
+                          index,
+                          e.target.value,
+                          predefinedWeight,
+                          predefinedSetsNumber
+                        )
+                      }
+                    />
+                    <label htmlFor={`reps${index}`}>Reps</label>
+                  </div>
+                  <p>@</p>
+                  <div className="exercise-form-field">
+                    <input
+                      id={`weight${index}`}
+                      name={`weight${index}`}
+                      value={sweat ? sweat.weight : predefinedWeight}
+                      onChange={(e) =>
+                        handleWeightChange(
+                          index,
+                          e.target.value,
+                          predefinedReps,
+                          predefinedSetsNumber
+                        )
+                      }
+                    />
+
+                    <label htmlFor={`weight${index}`}>Weight</label>
+                  </div>
+                  <p>lbs</p>
+                </div>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       <div className="workout-form">
         <label htmlFor="duration">Duration (minutes):</label>
         <input
@@ -279,8 +295,10 @@ function WorkoutProgress() {
           onChange={handleNotesChange}
         />
       </div>
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+      <div className="workout-progress-buttons">
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
+    </main>
   );
 }
 
