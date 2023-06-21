@@ -153,12 +153,10 @@ function WorkoutProgress() {
       }).then((response) => {
         if (response.ok) {
           response.json().then((sweat) => {
-            console.log("Sweat Post Success:", sweat);
             updatedSweats.push(sweat);
           });
         } else {
           response.json().then((errorData) => {
-            console.log("Sweat Post Errors:", errorData);
             setErrors([...errors, errorData.errors]);
           });
         }
@@ -181,7 +179,6 @@ function WorkoutProgress() {
     }).then((response) => {
       if (response.ok) {
         response.json().then((workout) => {
-          console.log("Workout Patch Success:", workout);
           const updatedWorkouts = userWorkouts.map((userWorkout) => {
             if (userWorkout.id === workout.id) {
               return workout;
@@ -194,7 +191,6 @@ function WorkoutProgress() {
         });
       } else {
         response.json().then((errorData) => {
-          console.log("Workout Patch Errors:", errorData);
           setErrors([...errors, errorData.errors]);
         });
       }

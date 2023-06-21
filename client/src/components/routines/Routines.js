@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import RoutineList from "./RoutineList";
 import RoutineSearch from "./RoutineSearch";
 import TargetMuscleFilter from "./TargetMuscleFilter";
-import { useContext } from "react";
-import { UserContext } from "../users/UserContext";
 import { RoutineContext } from "./RoutineContext";
 
 function Routines() {
-  const { user } = useContext(UserContext);
-  const { routines, setRoutines, favorites, setFavorites } =
-    useContext(RoutineContext);
+  const { routines, favorites, setFavorites } = useContext(RoutineContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [targetMuscle, setTargetMuscle] = useState("");
   const [showFavorites, setShowFavorites] = useState(false);

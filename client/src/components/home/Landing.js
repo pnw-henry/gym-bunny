@@ -44,11 +44,9 @@ function Landing() {
   };
 
   const favoriteRoutinesExist = favorites.length > 0;
-  console.log("favoriteRoutinesExist", favoriteRoutinesExist);
   const routinesToDisplay = favoriteRoutinesExist
     ? favorites.map((favorite) => findRoutineById(favorite.routine_id))
     : getRandomRoutines();
-  console.log("routinesToDisplay", routinesToDisplay);
   return (
     <main className="landing">
       <section className="workout-routines">
@@ -57,7 +55,6 @@ function Landing() {
             <h2>Favorite Workout Routines</h2>
             <div className="routine-card-list">
               {routinesToDisplay.map((routine) => {
-                console.log("routine", routine);
                 return <LandingCards routine={routine} key={routine.id} />;
               })}
             </div>

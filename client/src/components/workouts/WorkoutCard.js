@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { RoutineContext } from "../routines/RoutineContext";
-import { useContext } from "react";
 
 function WorkoutCard({ workout }) {
   const { routines } = useContext(RoutineContext);

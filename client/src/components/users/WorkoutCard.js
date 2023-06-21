@@ -16,12 +16,7 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
   const [errors, setErrors] = useState([]);
   const workoutApi = `/workouts/${id}`;
 
-  console.log("workout", workout);
-  console.log("userWorkouts", userWorkouts);
-  console.log("userSweats", userSweats);
-
   const routine = routines.find((routine) => routine.id === workout.routine_id);
-  console.log("routine", routine);
 
   const handleEditClick = () => {
     setEditing(true);
@@ -85,7 +80,7 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
         <div className="workout-card">
           <h4>{routine.name}</h4>
           <p className="workout-date">
-            {new Date(workout.date).toLocaleDateString(navigator.language, {
+            {new Date(date).toLocaleDateString(navigator.language, {
               dateStyle: "full",
             })}
           </p>
