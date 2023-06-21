@@ -93,9 +93,11 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
             <p>{duration} minutes</p>
             <p>{calories_burned} calories burned</p>
           </div>
-          <button onClick={handleShowDetails}>
-            {showDetails ? "Hide Details" : "Show Details"}
-          </button>
+          <div className="buttons">
+            <button className="btn-small" onClick={handleShowDetails}>
+              {showDetails ? "Hide Details" : "Show Details"}
+            </button>
+          </div>
           {showDetails && (
             <div className="profile-workout-details">
               {editing ? (
@@ -104,8 +106,12 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
                     value={editedNotes}
                     onChange={handleNotesChange}
                   ></textarea>
-                  <button onClick={handleCancelClick}>Cancel</button>
-                  <button onClick={handleNotesEdit}>Save</button>
+                  <button className="btn-small" onClick={handleCancelClick}>
+                    Cancel
+                  </button>
+                  <button className="btn-small" onClick={handleNotesEdit}>
+                    Save
+                  </button>
                   {errors.map((error) => (
                     <p key={error}>{error}</p>
                   ))}
@@ -113,7 +119,9 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
               ) : (
                 <div className="workout-notes">
                   <p>Notes: {workout.notes}</p>
-                  <button onClick={handleEditClick}>Edit Notes</button>
+                  <button className="btn-small" onClick={handleEditClick}>
+                    Edit Notes
+                  </button>
                 </div>
               )}
               <div className="exercise-details">
@@ -144,11 +152,16 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
                   <p>No exercises logged</p>
                 )}
               </div>
-              <div className="workout-buttons">
+              <div className="buttons">
                 <Link to={`/routines/${routine.id}`}>
-                  <button className="routine-button">Go To Routine</button>
+                  <button className="btn-small routine-button">
+                    Go To Routine
+                  </button>
                 </Link>
-                <button className="delete-button" onClick={handleDelete}>
+                <button
+                  className="btn-small delete-button"
+                  onClick={handleDelete}
+                >
                   Delete Workout
                 </button>
               </div>

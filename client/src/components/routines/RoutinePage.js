@@ -90,6 +90,7 @@ function RoutinePage() {
         {routineExercisesWithSets.map((exercise) => {
           return (
             <div className="routine-exercise-card" key={exercise.id}>
+              <h2>{exercise.name}</h2>
               {exercise.exercise_photo && (
                 <img
                   className="routine-exercise-photo"
@@ -98,9 +99,10 @@ function RoutinePage() {
                 />
               )}
               <div className="routine-exercise-info">
-                <h2>{exercise.name}</h2>
+                <p className="color-alt">
+                  Targets {exercise.muscle_target} muscles.
+                </p>
                 <p>{exercise.description}</p>
-                <p>Targets {exercise.muscle_target} muscles.</p>
                 <p>
                   Begin with {exercise.sets} sets and {exercise.reps} reps.
                 </p>

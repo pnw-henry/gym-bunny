@@ -72,9 +72,8 @@ function Profile() {
   return (
     <main className="profile">
       {user ? (
-        <section>
+        <>
           <div className="profile-details">
-            <h2>{user.name}</h2>
             {user.avatar && (
               <img
                 className="avatar-photo"
@@ -82,8 +81,13 @@ function Profile() {
                 alt={`${user.name}'s avatar`}
               />
             )}
-            <p>{user.email}</p>
-            <button onClick={handleLogout}>Logout</button>
+            <div className="profile-info">
+              <h2>{user.name}</h2>
+              <p>{user.email}</p>
+              <button className="btn-small" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
           </div>
           {!user.avatar && (
             <div className="avatar-upload">
@@ -119,7 +123,7 @@ function Profile() {
               </div>
             )}
           </div>
-        </section>
+        </>
       ) : (
         <div>
           <p>Please login or sign up</p>

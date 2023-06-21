@@ -58,65 +58,53 @@ function SignUp({ toggleSignup, signUp }) {
   return (
     <div className="signup-form">
       <form onSubmit={handleNewUserSubmit}>
-        <fieldset>
-          <input
-            type="text"
-            placeholder="Name"
-            autoComplete="off"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="text"
-            placeholder="Email"
-            autoComplete="off"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="text"
-            placeholder="Confirm Email"
-            autoComplete="off"
-            value={confirmEmail}
-            onChange={(e) => setConfirmEmail(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="text"
-            placeholder="Username"
-            autoComplete="off"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="password"
-            placeholder="Password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </fieldset>
-        <fieldset>
-          <input
-            type="password"
-            placeholder="Password Confirmation"
-            autoComplete="current-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </fieldset>
+        <input
+          type="text"
+          placeholder="Name"
+          autoComplete="off"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Email"
+          autoComplete="off"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Confirm Email"
+          autoComplete="off"
+          value={confirmEmail}
+          onChange={(e) => setConfirmEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Username"
+          autoComplete="off"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          autoComplete="current-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password Confirmation"
+          autoComplete="current-password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
 
-        <fieldset className="buttons">
+        <div className="buttons">
           <input type="submit" value="Sign Up" />
           <button onClick={toggleSignup}>{signUp ? "Login" : "Sign Up"}</button>
-        </fieldset>
+        </div>
       </form>
       {errors.length > 0 ? (
         <div className="errors">

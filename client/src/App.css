@@ -73,7 +73,8 @@ main {
   gap: 2em;
 }
 
-button {
+button,
+input[type="submit"] {
   border: solid 1px var(--brand-lighter);
   border-radius: 3em;
 
@@ -88,7 +89,8 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover,
+input[type="submit"]:hover {
   background-color: var(--brand-dark);
 }
 
@@ -287,12 +289,22 @@ button:hover {
   border: solid 1px var(--border-color);
 }
 
+.routine-exercises {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+}
+
 .routine-exercises .routine-exercise-card .routine-exercise-info {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-items: space-between;
   height: 100%;
+}
+
+.routine-exercise-info p {
+  margin: 0.25em;
 }
 
 /* WORKOUT PROGRESS */
@@ -436,7 +448,7 @@ button:hover {
 
 /* EXERCISE PAGE */
 
-.exercise-list {
+.exercise-container .exercise-list {
   display: flex;
   flex-direction: column;
   padding-inline: 15%;
@@ -473,9 +485,14 @@ button:hover {
   font-size: 0.8em;
 }
 
+.btn-small {
+  font-size: 0.8em;
+}
+
 .exercise-container .exercise-filters {
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   color: var(--brand-mid);
   padding-inline: 2em;
@@ -494,7 +511,7 @@ button:hover {
 
 .profile-details {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1em;
   align-items: left;
 }
@@ -503,7 +520,6 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: left;
-  width: 15%;
 }
 
 .avatar-photo {
@@ -548,4 +564,80 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 1em;
+}
+
+.color-alt {
+  color: var(--brand-lighter);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+
+.login-form,
+.signup-form {
+  max-width: 18em;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.login-form form,
+.signup-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.login-form form .buttons,
+.signup-form form .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.login-form form input[type="text"],
+.login-form form input[type="password"],
+.signup-form form input[type="text"],
+.signup-form form input[type="password"] {
+  border: solid 1px var(--brand-lighter);
+  border-radius: 3em;
+
+  background-color: var(--bg-color-alt);
+  padding: 0.5em 1em;
+  font-size: 1em;
+
+  color: var(--brand-light);
+  font-family: var(--font-family);
+  font-weight: 100;
+
+  text-align: left;
+}
+
+.login-form form input[type="text"]:focus,
+.login-form
+  form
+  input[type="password"]:focus
+  .signup-form
+  form
+  input[type="text"]:focus,
+.signup-form form input[type="password"]:focus {
+  outline: none;
+  border: solid 1px var(--brand-mid);
+}
+
+.login-form form input[type="text"]::placeholder,
+.login-form form input[type="password"]::placeholder,
+.signup-form form input[type="text"]::placeholder,
+.signup-form form input[type="password"]::placeholder {
+  color: var(--brand-mid);
+  text-align: left;
 }

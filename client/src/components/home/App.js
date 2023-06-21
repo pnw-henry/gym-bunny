@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { UserContext } from "../users/UserContext";
 import { ExerciseContext } from "../exercises/ExerciseContext";
 import { RoutineContext } from "../routines/RoutineContext";
@@ -36,7 +36,9 @@ function App() {
   useEffect(() => {
     fetch(routinesAPI)
       .then((response) => response.json())
-      .then((routines) => setRoutines(routines));
+      .then((routines) => {
+        setRoutines(routines);
+      });
   }, []);
 
   useEffect(() => {

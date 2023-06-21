@@ -50,7 +50,7 @@ function ExerciseCard({ exercise }) {
         <p>{description}</p>
         <p className="exercise-muscle-target">Targets the {muscle_target}.</p>
       </div>
-      <button className="exercise-btn" onClick={handleSelect}>
+      <button className="btn-small" onClick={handleSelect}>
         {selectedExercises.includes(exercise) ? "Remove" : "Add"}
       </button>
     </div>

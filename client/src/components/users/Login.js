@@ -43,11 +43,13 @@ function Login({ toggleSignup, signUp }) {
       } else {
         response.json().then((errorData) => {
           console.log(errorData);
-          setErrors(errorData);
+          setErrors([errorData]);
         });
       }
     });
   }
+
+  console.warn(errors);
 
   return (
     <div className="login-form">
@@ -66,15 +68,15 @@ function Login({ toggleSignup, signUp }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <fieldset className="buttons">
+        <div className="buttons">
           <input type="submit" value="Login" />
           <button onClick={toggleSignup}>{signUp ? "Login" : "Sign Up"}</button>
-        </fieldset>
+        </div>
       </form>
       {errors.length > 0 ? (
         <div className="errors">
-          {errors.map((error) => (
-            <p key={error}>{error}</p>
+          {errors.map((e) => (
+            <p key={e.errors}>{e.errors}</p>
           ))}
         </div>
       ) : null}
