@@ -80,18 +80,24 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
   };
 
   return (
-    <div className="workout-container">
+    <main className="user-profile-workouts">
       {user && routine && (
-        <div>
-          <h2>{routine.name}</h2>
-          <p>Date: {date}</p>
-          <p>Duration: {duration} minutes</p>
-          <p>Calories Burned: {calories_burned} calories</p>
+        <div className="workout-card">
+          <h4>{routine.name}</h4>
+          <p className="workout-date">
+            {new Date(workout.date).toLocaleDateString(navigator.language, {
+              dateStyle: "full",
+            })}
+          </p>
+          <div className="workout-numbers">
+            <p>{duration} minutes</p>
+            <p>{calories_burned} calories burned</p>
+          </div>
           <button onClick={handleShowDetails}>
             {showDetails ? "Hide Details" : "Show Details"}
           </button>
           {showDetails && (
-            <div>
+            <div className="profile-workout-details">
               {editing ? (
                 <div>
                   <textarea
@@ -105,7 +111,7 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
                   ))}
                 </div>
               ) : (
-                <div>
+                <div className="workout-notes">
                   <p>Notes: {workout.notes}</p>
                   <button onClick={handleEditClick}>Edit Notes</button>
                 </div>
@@ -113,7 +119,7 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
               <div className="exercise-details">
                 {userSweats.length !== 0 ? (
                   <div>
-                    <h3>Exercises</h3>
+                    <h2>Exercises</h2>
                     {routine.exercises.map((exercise) => (
                       <div key={exercise.id}>
                         {userSweats.map((sweat) => {
@@ -122,7 +128,7 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
                               {sweat.exercise_id === exercise.id &&
                                 sweat.workout_id === workout.id && (
                                   <div>
-                                    <p>{exercise.name}</p>
+                                    <h4>{exercise.name}</h4>
                                     <p>Weight: {sweat.weight} lbs</p>
                                     <p>Reps: {sweat.reps}</p>
                                     <p>Sets: {sweat.sets}</p>
@@ -150,7 +156,7 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
           )}
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

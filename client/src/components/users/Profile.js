@@ -99,15 +99,14 @@ function Profile() {
               </button>
             </div>
           )}
-          <div className="profile workouts">
+          <div className="profile-workouts">
             {userWorkouts.length === 0 ? (
               <div>
                 <p>You have no workouts.</p>
                 <Link to="/routines">Browse Workout Routines</Link>
               </div>
             ) : (
-              <div>
-                <h2>Workouts</h2>
+              <div className="workout-list">
                 {userWorkouts.map((workout) => {
                   return (
                     <WorkoutCard

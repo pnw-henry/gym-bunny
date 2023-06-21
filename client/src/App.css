@@ -439,21 +439,19 @@ button:hover {
 .exercise-list {
   display: flex;
   flex-direction: column;
-  gap: 2.5em;
-
   padding-inline: 15%;
 }
 
 .exercise-list .exercise-card {
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  gap: 2em;
   align-items: center;
 }
 
-.exercise-list .exercise-card img {
+.exercise-card .exercise-photo {
   width: 12em;
-  height: 8.5em;
+  height: 12em;
   object-fit: cover;
   border-radius: 0.75em;
   border: solid 1px var(--border-color);
@@ -465,6 +463,14 @@ button:hover {
   flex-direction: column;
   justify-items: space-between;
   height: 100%;
+}
+
+.exercise-details .exercise-muscle-target {
+  color: var(--brand-lighter);
+}
+
+.exercise-details {
+  font-size: 0.8em;
 }
 
 .exercise-container .exercise-filters {
@@ -506,4 +512,40 @@ button:hover {
   object-fit: cover;
   border-radius: 0.75em;
   border: solid 1px var(--border-color);
+}
+
+.profile-workouts .workout-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+.user-profile-workouts .workout-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-workouts .workout-card h4 {
+  margin-block: 0.12em;
+}
+.user-profile-workouts .workout-card p {
+  margin-block: 0.12em;
+}
+
+.user-profile-workouts .workout-card .workout-date {
+  color: var(--text-color-alt);
+}
+
+.user-profile-workouts .workout-card .workout-numbers {
+  color: var(--brand-lighter);
+}
+
+.user-profile-workouts .workout-card .workout-notes {
+  margin-block-start: 1em;
+}
+
+.profile-workout-details .exercise-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }

@@ -7,7 +7,11 @@ function ExerciseList({ exercises }) {
 
   return (
     <div className="exercise-list">
-      {exerciseCards.length > 0 ? exerciseCards : <h2>No exercises found.</h2>}
+      {exerciseCards.length > 0 ? (
+        exerciseCards
+      ) : (
+        <h4>You haven't selected any exercises.</h4>
+      )}
     </div>
   );
 }

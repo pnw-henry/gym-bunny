@@ -20,6 +20,10 @@ function Landing() {
     setLatestWorkouts(latest);
   }, [userWorkouts]);
 
+  if (!routines) {
+    return <div>Loading...</div>;
+  }
+
   const getRandomRoutines = () => {
     const randomRoutines = [];
     const availableRoutines = routines.filter(

@@ -38,15 +38,17 @@ function ExerciseCard({ exercise }) {
 
   return (
     <div className="exercise-card">
-      <div className="exercise-photo">
-        {exercise.exercise_photo && (
-          <img src={exercise.exercise_photo} alt="exercise_photo" />
-        )}
-      </div>
+      {exercise.exercise_photo && (
+        <img
+          className="exercise-photo"
+          src={exercise.exercise_photo}
+          alt="exercise_photo"
+        />
+      )}
       <div className="exercise-details">
         <h2>{name}</h2>
         <p>{description}</p>
-        <p>Target Muscle: {muscle_target}</p>
+        <p className="exercise-muscle-target">Targets the {muscle_target}.</p>
       </div>
       <button className="exercise-btn" onClick={handleSelect}>
         {selectedExercises.includes(exercise) ? "Remove" : "Add"}
