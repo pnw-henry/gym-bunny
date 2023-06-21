@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: gym_bunny_production
-  username: gym_bunny
-  password: <%= ENV["GYM_BUNNY_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

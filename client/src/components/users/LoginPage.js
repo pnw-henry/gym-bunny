@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import { UserContext } from "./UserContext";
@@ -6,6 +7,7 @@ import { useContext } from "react";
 
 function LoginPage() {
   const [signUp, setSignUp] = useState(false);
+  const navigate = useNavigate();
 
   const { user, setUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
@@ -16,6 +18,7 @@ function LoginPage() {
       if (response.ok) {
         setUser(null);
         setIsLoggedIn(false);
+        navigate("/");
       }
     });
   }

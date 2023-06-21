@@ -49,8 +49,6 @@ function Login({ toggleSignup, signUp }) {
     });
   }
 
-  console.warn(errors);
-
   return (
     <div className="login-form">
       <form onSubmit={handleLogin}>
