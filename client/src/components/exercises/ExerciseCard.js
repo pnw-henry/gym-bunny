@@ -6,7 +6,7 @@ function ExerciseCard({ exercise }) {
   const { id, name, description, muscle_target } = exercise;
   const { selectedExercises, setSelectedExercises } =
     useContext(ExerciseContext);
-  //const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState(null);
 
   const handleSelect = () => {
     if (selectedExercises.includes(exercise)) {
@@ -19,7 +19,7 @@ function ExerciseCard({ exercise }) {
       setSelectedExercises([...selectedExercises, exercise]);
     }
   };
-  /*
+
   const handlePhotoChange = (e) => {
     setPhoto(e.target.files[0]);
   };
@@ -34,10 +34,12 @@ function ExerciseCard({ exercise }) {
     });
   };
 
-  */
-
   return (
     <div className="exercise-card">
+      <form onSubmit={handlePhotoSubmit}>
+        <input type="file" onChange={handlePhotoChange} />
+        <button type="submit">Upload</button>
+      </form>
       {exercise.exercise_photo && (
         <img
           className="exercise-photo"
