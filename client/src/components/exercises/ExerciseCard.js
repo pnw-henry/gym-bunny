@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ExerciseContext } from "./ExerciseContext";
 
 function ExerciseCard({ exercise }) {
   const { id, name, description, muscle_target } = exercise;
   const { selectedExercises, setSelectedExercises } =
     useContext(ExerciseContext);
-  //const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState(null);
 
   const handleSelect = () => {
     if (selectedExercises.includes(exercise)) {
@@ -18,7 +18,7 @@ function ExerciseCard({ exercise }) {
       setSelectedExercises([...selectedExercises, exercise]);
     }
   };
-  /*
+
   const handlePhotoChange = (e) => {
     setPhoto(e.target.files[0]);
   };
@@ -33,8 +33,6 @@ function ExerciseCard({ exercise }) {
     });
   };
 
-  */
-
   return (
     <div className="exercise-card">
       {exercise.exercise_photo && (
@@ -48,6 +46,12 @@ function ExerciseCard({ exercise }) {
         <h2>{name}</h2>
         <p>{description}</p>
         <p className="exercise-muscle-target">Targets the {muscle_target}.</p>
+        <form onSubmit={handlePhotoSubmit}>
+          <input type="file" onChange={handlePhotoChange} />
+          <button className="btn-small" type="submit">
+            Upload
+          </button>
+        </form>
       </div>
       <button className="btn-small" onClick={handleSelect}>
         {selectedExercises.includes(exercise) ? "Remove" : "Add"}
