@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../users/UserContext";
 import { RoutineContext } from "./RoutineContext";
@@ -7,7 +7,7 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
   const { id, name, description, owner } = routine;
   const { user } = useContext(UserContext);
   const { favorites } = useContext(RoutineContext);
-  const [photo, setPhoto] = useState(null);
+  //const [photo, setPhoto] = useState(null);
 
   const handleAddFavorite = () => {
     fetch(`/favorites`, {
@@ -25,7 +25,7 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
         onAddFavorite(newFavorite);
       });
   };
-
+  /*
   const handlePhotoChange = (e) => {
     setPhoto(e.target.files[0]);
   };
@@ -39,6 +39,7 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
       body: formData,
     });
   };
+*/
 
   const handleDeleteFavorite = () => {
     const favoriteToDelete = favorites.find(
@@ -64,10 +65,6 @@ function RoutineCard({ routine, onAddFavorite, onRemoveFavorite }) {
         <h3>{name}</h3>
         <p>{description}</p>
         <p className="owner">{owner}</p>
-        <form onSubmit={handlePhotoSubmit}>
-          <input type="file" onChange={handlePhotoChange} />
-          <button type="submit">Upload</button>
-        </form>
       </div>
 
       {user && !favorites.find((favorite) => favorite.routine_id === id) && (
