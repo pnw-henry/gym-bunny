@@ -75,24 +75,11 @@ function Profile() {
         <>
           <div className="profile-details">
             {user.avatar && (
-              <div>
-                <img
-                  className="avatar-photo"
-                  src={user.avatar}
-                  alt={`${user.name}'s avatar`}
-                />
-
-                <input
-                  type="file"
-                  name="avatar"
-                  accept="image/*"
-                  multiple={false}
-                  onChange={handleAvatarChange}
-                />
-                <button onClick={handleAvatarSubmit}>
-                  {user.avatar ? "Change Photo" : "Upload Photo"}
-                </button>
-              </div>
+              <img
+                className="avatar-photo"
+                src={user.avatar}
+                alt={`${user.name}'s avatar`}
+              />
             )}
             <div className="profile-info">
               <h2>{user.name}</h2>
